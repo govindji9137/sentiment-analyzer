@@ -3,15 +3,21 @@ import pickle
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-
-# Load model and tokenizer
+import gdown
+import os
 
 @st.cache_resource
 def load_models():
-    model = load_model(r'C:\Users\ASUS\OneDrive\Desktop\Deep Learning BASIC TO ADV\Projects\sentiment-analyzer\sentiment-analyzer.keras')
-    with open(r'C:\Users\ASUS\OneDrive\Desktop\Deep Learning BASIC TO ADV\Projects\sentiment-analyzer\tokenizer.pkl', 'rb') as f: tok = pickle.load(f)
+    if not os.path.exists('sentiment-analyzer.keras'):
+        gdown.download('https://drive.google.com/file/d/12BTxSkeltLVUdGf3ovNo91UvOS-b48FZ/view?usp=drive_link', 'sentiment-analyzer.keras', quiet=False)
+    if not os.path.exists('tokenizer.pkl'):
+        gdown.download('https://drive.google.com/file/d/12YbicspfsEGZtNxWcA9NR9_JWTKW0EHR/view?usp=drive_link', 'tokenizer.pkl', quiet=False)
     
+    model = load_model('best_model.keras')
+    with open('tokenizer.pkl', 'rb') as f:
+        tok = pickle.load(f)
     return model, tok
+
 
 model, tok = load_models()
 # model = load_model(r'C:\Users\ASUS\OneDrive\Desktop\Deep Learning BASIC TO ADV\Projects\sentiment-analyzer\sentiment-analyzer.keras')
