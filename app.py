@@ -13,7 +13,7 @@ def load_models():
     if not os.path.exists('tokenizer.pkl'):
         gdown.download('https://drive.google.com/file/d/12YbicspfsEGZtNxWcA9NR9_JWTKW0EHR/view?usp=drive_link', 'tokenizer.pkl', quiet=False)
     
-    model = load_model('best_model.keras')
+    model = load_model('sentiment-analyzer.keras')
     with open('tokenizer.pkl', 'rb') as f:
         tok = pickle.load(f)
     return model, tok
